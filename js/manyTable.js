@@ -8,6 +8,7 @@ for(var i=1 ; i<=10 ; i++){
     var newTable=document.createElement("INPUT");
     newTable.setAttribute("type","checkbox");
     newTable.setAttribute("id","table"+i)
+    newTable.setAttribute("name","table[]")
     newTable.value=i;
     var labels=document.createElement("label");
     labels.htmlFor="table"+i;
@@ -16,19 +17,20 @@ for(var i=1 ; i<=10 ; i++){
     newDiv.appendChild(labels);
     selecteur.appendChild(newDiv)
 };
-console.log(nbTable)
-var button= document.getElementById("voir");
-var form= document.getElementById("choiceContainer");
-var multiple= 1; 
 
-for(var i= 1; i<=10 ; i++){
-    var table=document.getElementById("tableau");
-    var ligne= table.insertRow()
-    for(var x=1; x<=3 ; x++){
-        
-        var caseTableau = ligne.insertCell();
-        caseTableau.innerHTML=nbTable+" x "+multiple+" = "+(nbTable*multiple);
-        multiple++;
-    }
-
+console.log(array);
+var multiple=1;
+var container= document.getElementById("choiceContainer");
+for(var i=0 ; i<=nbTable ; i++){
+    var tableau= document.createElement("table");
+    container.appendChild(tableau);
+    for(var y= 1; y<=10 ; y++){
+        var ligne= tableau.insertRow();
+            for(var x=1; x<=3 ; x++){
+                var caseTableau = ligne.insertCell();
+                caseTableau.innerHTML=nbTable+" x "+multiple+" = "+(nbTable*multiple);
+                multiple++;
+            }
+        }
 }
+                        
