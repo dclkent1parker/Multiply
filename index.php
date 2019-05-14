@@ -6,7 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet"> 
     <link rel="stylesheet" href="css/multiply.css">
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    function loadTable() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("result").innerHTML =
+                this.responseText;
+        }
+        };
+        xhttp.open("GET", "table.php?selecteur="+$("select option:selected").val(), true);
+        xhttp.send(); 
+    }
+    </script>
     <title>Multiply</title>
 </head>
 <body>
@@ -24,11 +37,14 @@
                     <li id="tab3"><a href="index3.php">Interrogation</a></li>
                     <li id="tab4"><a href="index4.php">Super révision</a></li>
                 </ul>
-                <form action="table.php" method="get" id="choiceContainer">
+                <form action="index.php" method="get" id="choiceContainer">
                     <h2>Veuillez choisir la table à afficher</h2>
-                    <select name="selecteur" id="selecteur">
+                    <select name="selecteur" id="selecteur" onchange="loadTable()">
                     </select>
-                    <button type="submit" id="voir">Voir</button>
+                    
+                    <div id="result">
+
+                    </div>
                 </form>
 
             </div>
@@ -37,6 +53,6 @@
     <footer>
         <h4>Created by Kent1</h4>
     </footer>
-<script src="js/table.js"></script>
+<script src="js/interro.js"></script>
 </body>
 </html>

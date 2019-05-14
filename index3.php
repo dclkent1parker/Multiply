@@ -5,8 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet"> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/multiply.css">
-    
+    <script>
+    function loadTable() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("response").innerHTML =
+                this.responseText;
+        }
+        };
+        xhttp.open("GET", "interro.php?selecteur="+$("select option:selected").val(), true);
+        xhttp.send(); 
+    }
+    </script>
     <title>Multiply</title>
 </head>
 <body>
@@ -26,13 +39,13 @@
                 </ul>
                 <form action="index3.php" method="get" id="choiceContainer">
                     <h2>Choisissez une table, nous vous proposerons une multiplication à résoudre</h2>
-                    <select name="selecteur" id="selecteur">
+                    <select name="selecteur" id="selecteur" onchange="loadTable()">
                     </select>
-                    <button type="submit" name="envoyer" id="voir">Voir</button>
                     
                 </form>
-            <?php if (isset($_GET['envoyer'])){include ('interro.php');}?>
-            <?php if (isset($_GET['result'])){include ('win.php');}?>
+            <div id="response">
+                <?php if (isset($_GET['result'])){include ('win.php');}?>
+            </div>
             </div>
         </div>
     </main>
